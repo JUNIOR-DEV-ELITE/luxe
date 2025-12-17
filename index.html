@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LUXE | Luxury Online Boutique</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* CSS Reset and Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --black: #0f0f0f;
+        --dark-gray: #1a1a1a;
+        --medium-gray: #2d2d2d;
+        --beige: #f5f1e8;
+        --light-beige: #faf8f3;
+        --gold: #c5a572;
+        --light-gold: #e6d7b8;
+        --white: #ffffff;
+        --text-light: #999;
+        --transition: all 0.3s ease;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--dark-gray);
+        background-color: var(--white);
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Georgia", serif;
+        font-weight: normal;
+        line-height: 1.3;
+        color: var(--black);
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .section {
+        padding: 80px 0;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+        position: relative;
+      }
+
+      .section-title h2 {
+        font-size: 2.5rem;
+        display: inline-block;
+        padding-bottom: 15px;
+      }
+
+      .section-title h2:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 2px;
+        background-color: var(--gold);
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: var(--gold);
+        color: var(--black);
+        border: none;
+        border-radius: 2px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .btn:hover {
+        background-color: var(--light-gold);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+      }
+
+      .btn-outline:hover {
+        background-color: var(--gold);
+        color: var(--black);
+      }
+
+      /* Header */
+      header {
+        background-color: var(--white);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .logo {
+        font-family: "Georgia", serif;
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--black);
+        letter-spacing: 2px;
+      }
+
+      .logo span {
+        color: var(--gold);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav li {
+        margin-left: 30px;
+      }
+
+      nav a {
+        font-weight: 500;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: var(--transition);
+      }
+
+      nav a:hover {
+        color: var(--gold);
+      }
+
+      .header-icons {
+        display: flex;
+      }
+
+      .header-icons a {
+        margin-left: 20px;
+        font-size: 1.1rem;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(
+            rgba(15, 15, 15, 0.8),
+            rgba(15, 15, 15, 0.8)
+          ),
+          url("https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
+        background-size: cover;
+        background-position: center;
+        color: var(--white);
+        padding: 180px 0 100px;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        color: var(--white);
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto 40px;
+        color: var(--beige);
+      }
+
+      /* Featured Products */
+      .products {
+        background-color: var(--light-beige);
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      .product-card {
+        background-color: var(--white);
+        border-radius: 2px;
+        overflow: hidden;
+        transition: var(--transition);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image {
+        height: 250px;
+        background-color: var(--medium-gray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--light-beige);
+        overflow: hidden;
+      }
+
+      .product-image i {
+        font-size: 4rem;
+        opacity: 0.7;
+      }
+
+      .product-info {
+        padding: 20px;
+      }
+
+      .product-info h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+
+      .product-info p {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+      }
+
+      .product-price {
+        font-weight: bold;
+        color: var(--gold);
+        font-size: 1.2rem;
+      }
+
+      /* About Section */
+      .about {
+        background-color: var(--white);
+      }
+
+      .about-content {
+        display: flex;
+        align-items: center;
+        gap: 60px;
+      }
+
+      .about-image {
+        flex: 1;
+        height: 400px;
+        background-color: var(--beige);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--dark-gray);
+      }
+
+      .about-image i {
+        font-size: 5rem;
+        opacity: 0.5;
+      }
+
+      .about-text {
+        flex: 1;
+      }
+
+      .about-text h3 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+
+      .about-text p {
+        margin-bottom: 20px;
+        color: var(--medium-gray);
+      }
+
+      /* Testimonials */
+      .testimonials {
+        background-color: var(--dark-gray);
+        color: var(--white);
+      }
+
+      .testimonials .section-title h2 {
+        color: var(--white);
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .testimonial-card {
+        background-color: var(--black);
+        padding: 30px;
+        border-radius: 2px;
+        border-left: 3px solid var(--gold);
+      }
+
+      .testimonial-text {
+        font-style: italic;
+        margin-bottom: 20px;
+        color: var(--beige);
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+      }
+
+      .author-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--medium-gray);
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .author-avatar i {
+        font-size: 1.5rem;
+        color: var(--gold);
+      }
+
+      .author-info h4 {
+        color: var(--white);
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+
+      .author-info p {
+        color: var(--text-light);
+        font-size: 0.9rem;
+      }
+
+      /* CTA Section */
+      .cta {
+        background: linear-gradient(
+            rgba(245, 241, 232, 0.9),
+            rgba(245, 241, 232, 0.9)
+          ),
+          url("https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80");
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+      }
+
+      .cta h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      .cta p {
+        max-width: 700px;
+        margin: 0 auto 40px;
+        color: var(--medium-gray);
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--black);
+        color: var(--white);
+        padding: 60px 0 20px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column h3 {
+        color: var(--white);
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 1px;
+        background-color: var(--gold);
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column a {
+        color: var(--text-light);
+        transition: var(--transition);
+      }
+
+      .footer-column a:hover {
+        color: var(--gold);
+      }
+
+      .newsletter-form {
+        display: flex;
+        margin-top: 15px;
+      }
+
+      .newsletter-form input {
+        flex: 1;
+        padding: 12px;
+        background-color: var(--dark-gray);
+        border: none;
+        color: var(--white);
+        border-radius: 2px 0 0 2px;
+      }
+
+      .newsletter-form button {
+        background-color: var(--gold);
+        color: var(--black);
+        border: none;
+        padding: 0 20px;
+        border-radius: 0 2px 2px 0;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .newsletter-form button:hover {
+        background-color: var(--light-gold);
+      }
+
+      .social-icons {
+        display: flex;
+        margin-top: 20px;
+      }
+
+      .social-icons a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: var(--dark-gray);
+        border-radius: 50%;
+        margin-right: 10px;
+        transition: var(--transition);
+      }
+
+      .social-icons a:hover {
+        background-color: var(--gold);
+        color: var(--black);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid var(--medium-gray);
+        color: var(--text-light);
+        font-size: 0.9rem;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 992px) {
+        .hero h1 {
+          font-size: 2.8rem;
+        }
+
+        .about-content {
+          flex-direction: column;
+        }
+
+        .about-image,
+        .about-text {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          position: fixed;
+          top: 70px;
+          left: 0;
+          width: 100%;
+          background-color: var(--white);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          transform: translateY(-100%);
+          opacity: 0;
+          visibility: hidden;
+          transition: var(--transition);
+        }
+
+        nav.active {
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
+        }
+
+        nav ul {
+          flex-direction: column;
+        }
+
+        nav li {
+          margin: 0 0 15px 0;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .hero {
+          padding: 150px 0 80px;
+        }
+
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .section {
+          padding: 60px 0;
+        }
+
+        .section-title h2 {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .btn {
+          padding: 10px 20px;
+        }
+
+        .newsletter-form {
+          flex-direction: column;
+        }
+
+        .newsletter-form input {
+          border-radius: 2px;
+          margin-bottom: 10px;
+        }
+
+        .newsletter-form button {
+          border-radius: 2px;
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container header-container">
+        <a href="#" class="logo">LUXE<span>.</span></a>
+
+        <div class="mobile-menu-btn" id="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <nav id="main-nav">
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Collections</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-icons">
+          <a href="#"><i class="fas fa-search"></i></a>
+          <a href="#"><i class="fas fa-user"></i></a>
+          <a href="#"><i class="fas fa-shopping-bag"></i></a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container">
+        <h1>Timeless Elegance, Curated for You</h1>
+        <p>
+          Discover our exclusive collection of luxury goods, crafted with
+          precision and designed for those who appreciate the finer things in
+          life. Experience unparalleled quality and sophistication.
+        </p>
+        <a href="#products" class="btn">Explore Collection</a>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section products" id="products">
+      <div class="container">
+        <div class="section-title">
+          <h2>Featured Collections</h2>
+        </div>
+
+        <div class="products-grid">
+          <!-- Product 1 -->
+          <div class="product-card">
+            <div class="product-image">
+              <i class="fas fa-gem"></i>
+            </div>
+            <div class="product-info">
+              <h3>Emerald Necklace</h3>
+              <p>Handcrafted 18k gold necklace with Colombian emeralds</p>
+              <div class="product-price">$4,250</div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card">
+            <div class="product-image">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="product-info">
+              <h3>Automatic Chronograph</h3>
+              <p>
+                Swiss-made timepiece with sapphire crystal and leather strap
+              </p>
+              <div class="product-price">$8,900</div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card">
+            <div class="product-image">
+              <i class="fas fa-tshirt"></i>
+            </div>
+            <div class="product-info">
+              <h3>Cashmere Overcoat</h3>
+              <p>
+                Italian cashmere coat tailored for exceptional comfort and style
+              </p>
+              <div class="product-price">$2,800</div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card">
+            <div class="product-image">
+              <i class="fas fa-suitcase"></i>
+            </div>
+            <div class="product-info">
+              <h3>Leather Travel Bag</h3>
+              <p>
+                Hand-stitched full-grain leather weekender with brass hardware
+              </p>
+              <div class="product-price">$1,950</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-image">
+            <i class="fas fa-crown"></i>
+          </div>
+          <div class="about-text">
+            <h3>The LUXE Experience</h3>
+            <p>
+              Founded in 2010, LUXE has redefined luxury shopping by curating
+              exceptional products that blend timeless craftsmanship with
+              contemporary design. Our commitment to excellence is reflected in
+              every item we offer.
+            </p>
+            <p>
+              We partner with world-renowned artisans and emerging designers to
+              bring you a collection that represents the pinnacle of quality and
+              style. Each product is meticulously selected to ensure it meets
+              our exacting standards.
+            </p>
+            <p>
+              At LUXE, we believe luxury is not just about price—it's about
+              authenticity, craftsmanship, and creating meaningful connections
+              with our clients.
+            </p>
+            <a href="#" class="btn btn-outline">Our Story</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-title">
+          <h2>Client Testimonials</h2>
+        </div>
+
+        <div class="testimonials-grid">
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              "The quality of the products at LUXE is unparalleled. My emerald
+              necklace arrived beautifully packaged and exceeded all
+              expectations. Truly exceptional service."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="author-info">
+                <h4>Eleanor Richardson</h4>
+                <p>New York, NY</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              "As someone who values craftsmanship, I appreciate the attention
+              to detail in every LUXE product. The watch I purchased is not just
+              a timepiece but a work of art."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="author-info">
+                <h4>James Wellington</h4>
+                <p>London, UK</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              "Shopping at LUXE is always a pleasure. Their customer service
+              team is attentive and knowledgeable. I've purchased multiple items
+              and each has been perfect."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="author-info">
+                <h4>Isabella Rossi</h4>
+                <p>Milan, Italy</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+      <div class="container">
+        <h2>Join Our Exclusive Community</h2>
+        <p>
+          Subscribe to our newsletter and be the first to access new
+          collections, private events, and special offers reserved for our
+          members.
+        </p>
+        <a href="#" class="btn">Subscribe Now</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>LUXE</h3>
+            <p>
+              Experience luxury redefined. Curated collections of the finest
+              goods for the discerning individual.
+            </p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-pinterest-p"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#products">Collections</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#testimonials">Testimonials</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Customer Service</h3>
+            <ul>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Shipping Policy</a></li>
+              <li><a href="#">Returns & Exchanges</a></li>
+              <li><a href="#">FAQs</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Stay Updated</h3>
+            <p>Subscribe to our newsletter for exclusive updates and offers.</p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>
+            &copy; 2023 LUXE. All rights reserved. | Designed for portfolio
+            demonstration
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript for mobile menu -->
+    <script>
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mainNav = document.getElementById("main-nav");
+
+      mobileMenuBtn.addEventListener("click", function () {
+        mainNav.classList.toggle("active");
+
+        // Change icon based on menu state
+        const icon = mobileMenuBtn.querySelector("i");
+        if (mainNav.classList.contains("active")) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+        } else {
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      });
+
+      // Close mobile menu when clicking a link
+      const navLinks = document.querySelectorAll("nav a");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          if (mainNav.classList.contains("active")) {
+            mainNav.classList.remove("active");
+            const icon = mobileMenuBtn.querySelector("i");
+            icon.classList.remove("fa-times");
+            icon.classList.add("fa-bars");
+          }
+        });
+      });
+
+      // Newsletter form submission
+      const newsletterForm = document.querySelector(".newsletter-form");
+      newsletterForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const emailInput = this.querySelector('input[type="email"]');
+        alert(`Thank you for subscribing with email: ${emailInput.value}`);
+        emailInput.value = "";
+      });
+    </script>
+  </body>
+</html>
